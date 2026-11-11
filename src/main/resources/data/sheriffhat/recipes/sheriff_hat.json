@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": { "L": { "item": "minecraft:leather" }, "D": { "item": "minecraft:brown_dye" } },
+  "pattern": [" L ", "LDL", "LLL"],
+  "result": { "item": "sheriffhat:sheriff_hat" }
+}

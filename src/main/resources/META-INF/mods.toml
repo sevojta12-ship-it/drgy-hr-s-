@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+
+[[mods]]
+modId="sheriffhat"
+version="${mod_version}"
+displayName="Sheriff's Hat"
+description='''
+A blocky sheriff's hat for the Curios head slot. Comes in a plain version and a badge version.
+'''
+
+[[dependencies.sheriffhat]]
+modId="forge"
+mandatory=true
+versionRange="[47,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.sheriffhat]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1,1.21)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.sheriffhat]]
+modId="curios"
+mandatory=true
+versionRange="[5.2,)"
+ordering="NONE"
+side="BOTH"

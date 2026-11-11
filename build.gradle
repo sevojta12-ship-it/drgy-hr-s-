@@ -1,0 +1,51 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '[6.0.16,6.2)'
+}
+
+version = mod_version
+group = mod_group_id
+
+base { archivesName = mod_id }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: 'official', version: minecraft_version
+    copyIdeResources = true
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+        client {}
+        server { args '--nogui' }
+    }
+}
+
+repositories {
+    maven { name = 'Illusive Soulworks'; url = 'https://maven.theillusivec4.top/' }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    def props = [mod_version: mod_version]
+    inputs.properties props
+    filesMatching(['META-INF/mods.toml']) { expand props }
+}
+
+tasks.named('jar', Jar).configure { finalizedBy 'reobfJar' }
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
